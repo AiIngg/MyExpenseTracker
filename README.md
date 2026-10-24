@@ -1,128 +1,118 @@
-1. 安裝 Node.js
+# MyExpenseTracker
 
-官方下載網址：https://nodejs.org/en/download
+A personal expense tracking web application built with **Angular**, **ASP.NET Core Web API**, and **Oracle Database**.
 
-安裝完成後，重新開啟 VS Code，進入 Terminal執行以下指令確認是否安裝成功：
+This project is developed to practice full-stack web development by building a system for managing income, expenses, budgets, and debts.
 
-node -v
-npm -v
+## Features
 
-如果成功，終端機會顯示 Node.js 和 npm 的版本號。
+### Web Application
 
-2. 安裝 Angular CLI 並建立前端專案
+- **Overview** — A dashboard for reviewing financial information.
+- **Transaction Management** — Manage income and expense records, including amounts, dates, categories, and payment methods.
+- **Debt Management** — Organize debt-related records. Track debts between people, including money you owe to others, money others owe you, and the final outstanding balance to determine who owes whom and how much.
+- **Budget Management** — Organize budgets by category and month.
 
-官方網站：https://angular.dev/tools/cli
+### Backend & Database
 
-安裝 Angular CLI
+- **RESTful API** — Provides endpoints for creating, retrieving, updating, and deleting financial records.
+- **Oracle Database Integration** — Stores and retrieves financial data using Oracle Database.
 
-確認 Node.js 和 npm 可以正常使用後，執行：
+*Note: Some features and frontend-backend integrations are still under development.*
 
-npm install -g @angular/cli
+## Tech Stack
 
-確認 Angular CLI 是否安裝成功：
+| Layer | Technologies |
+|---|---|
+| Frontend | Angular, TypeScript, HTML, CSS |
+| Backend | C#, ASP.NET Core Web API |
+| Database | Oracle Database |
+| Database Client | Oracle SQL Developer |
+| Development Tools | Visual Studio Code, Git, GitHub |
 
-ng version
+## Project Structure
 
-建立 Angular 專案
-
-在專案根目錄 D:\MyExpenseTracker 執行：
-
-ng new frontend
-
-依照終端機提示完成設定。
-
-建立完成後，進入前端資料夾：
-
-cd frontend
-
-啟動 Angular 開發伺服器：
-
-ng serve
-
-
-在瀏覽器開啟：
-
-http://localhost:4200
-
-如果看到 Angular 網頁，代表前端已成功啟動。
-
-3. 安裝 .NET SDK 並建立 C# 後端
-
-.NET SDK 用來建立、編譯和執行 C# 程式，以及開發 ASP.NET Core Web API。
-
-官方下載網址：https://dotnet.microsoft.com/en-us/download
-建議版本：.NET 10 LTS
-Windows 一般 Intel / AMD 電腦通常選擇 x64 SDK Installer。
-確認是否安裝成功
-
-安裝完成後，重新開啟 VS Code，執行：
-
-dotnet --version
-
-如果成功，終端機會顯示 .NET SDK 版本號。
-
-也可以查看已安裝的 SDK：
-
-dotnet --list-sdks
-建立 ASP.NET Core Web API
-
-在專案根目錄 D:\MyExpenseTracker 執行：
-
-dotnet new webapi -o backend
-
-進入後端資料夾：
-
-cd backend
-
-執行後端：
-
-dotnet run
-
-終端機會顯示實際啟動網址。使用該網址測試 API；若專案有啟用 Swagger，也可以開啟終端機顯示的 Swagger 網址進行測試。
-
-4. 安裝與設定 Oracle Database
-
-Oracle Database 用來儲存記賬網站的收入、支出、日期、類別和備註等資料。
-
-Oracle Database 官方網站：https://www.oracle.com/database/
-Oracle Database Free：https://www.oracle.com/database/free/
-
-安裝完成後，可以使用 Oracle SQL Developer 管理資料庫及執行 SQL。
-
-Oracle SQL Developer 官方下載網址：
-
-https://www.oracle.com/database/sqldeveloper/
-
-後續設定步驟：
-
-安裝 Oracle Database。
-建立或確認可用的資料庫使用者。
-使用 SQL Developer 連線資料庫。
-建立記賬網站需要的資料表。
-設定 C# ASP.NET Core Web API 連接 Oracle。
-5. 專案資料夾結構
-
-預計專案結構如下：
-
+```text
 MyExpenseTracker/
-├── frontend/          # Angular 前端
-├── backend/           # C# ASP.NET Core Web API
-└── database/          # Oracle SQL 腳本與資料庫相關檔案
+├── frontend/    # Angular frontend application
+├── backend/     # C# ASP.NET Core Web API
+├── database/    # Database scripts (planned)
+├── .gitignore
+└── README.md
+```
 
-frontend 和 backend 會由專案建立指令自動產生。database 可以在開始整理 SQL 腳本時再建立。
+## Getting Started
 
-6. 技術架構
-Frontend: Angular, TypeScript, HTML, CSS
-Backend: C#, ASP.NET Core Web API
-Database: Oracle Database
-Database Client: Oracle SQL Developer
-Development Environment: Visual Studio Code
-7. 開發順序
-安裝 Node.js 並確認 npm 正常。
-安裝 Angular CLI，建立並啟動前端。
-安裝 .NET SDK，建立並啟動後端 API。
-安裝 Oracle Database，建立資料表。
-設定 C# 後端連接 Oracle。
-讓 Angular 呼叫後端 API。
-實作新增、查詢、修改、刪除記賬紀錄（CRUD）。
-加入收入支出統計、篩選及圖表功能。
+### Prerequisites
+
+Install the following tools before running the project:
+
+- [Node.js and npm](https://nodejs.org/en/download)
+- [Angular CLI](https://angular.dev/tools/cli)
+- [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download)
+- [Oracle Database Free](https://www.oracle.com/database/free/)
+
+[Oracle SQL Developer](https://www.oracle.com/database/sqldeveloper/) can be used to manage the database and execute SQL statements.
+
+### 1. Clone the Repository
+
+Open a terminal and run:
+
+```bash
+git clone https://github.com/AiIngg/MyExpenseTracker.git
+cd MyExpenseTracker
+```
+
+### 2. Run the Frontend
+
+Open a terminal in the project root and run:
+
+```bash
+cd frontend
+npm install
+ng serve --port 4300
+```
+
+Open [http://localhost:4300](http://localhost:4300) in your browser.
+
+### 3. Configure the Database Connection
+
+Make sure Oracle Database is running and the required database user and tables have been created.
+
+Configure the Oracle connection string in your local backend settings. For example, create `backend/appsettings.Development.json` with your own database credentials:
+
+```json
+{
+  "ConnectionStrings": {
+    "OracleDb": "User Id=YOUR_USERNAME;Password=YOUR_PASSWORD;Data Source=localhost:1521/freepdb1"
+  }
+}
+```
+
+Replace the example username and password with your own settings. Update the data source if your Oracle Database uses a different host, port, or service name.
+
+**Security:** Never commit database passwords or other secrets to GitHub.
+
+### 4. Run the Backend
+
+Open a separate terminal and run:
+
+```bash
+cd backend
+dotnet restore
+dotnet run
+```
+
+Check the terminal output for the backend URL. Make sure the frontend's API base URL matches the address where the backend is running.
+
+## Development Goals
+
+- Complete frontend and backend integration.
+- Improve transaction, budget, and debt management.
+- Enhance input validation and error handling.
+- Refine the user interface and user experience.
+- Prepare the application for deployment.
+
+## Author
+
+Developed as a personal full-stack learning project to practice frontend development, backend API design, Oracle database integration, and version control.
