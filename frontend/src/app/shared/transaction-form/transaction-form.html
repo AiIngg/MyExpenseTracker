@@ -1,0 +1,163 @@
+
+<button class="add-button" (click)="openAddForm()">
+  + Add Transaction
+</button>
+
+@if (showForm) {
+  <div class="modal-backdrop" (click)="closeForm()">
+    <section
+      class="transaction-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="transaction-form-title"
+      (click)="$event.stopPropagation()"
+    >
+      <h2 id="transaction-form-title">
+        {{ editingId === null ? 'Add Transaction' : 'Edit Transaction' }}
+      </h2>
+
+      <form (ngSubmit)="saveTransaction()">
+
+        <label for="date">Date</label>
+        <input
+          id="date"
+          name="date"
+          type="date"
+          [(ngModel)]="form.date"
+          required
+        />
+
+        <label for="type">Type</label>
+        <select
+          id="type"
+          name="type"
+          [(ngModel)]="form.type"
+          (ngModelChange)="onTypeChange()"
+          required
+        >
+          <option value="Expense">Expense</option>
+          <option value="Income">Income</option>
+        </select>
+
+                <label for="category">Category</label>
+        <select
+          id="category"
+          name="category"
+          [(ngModel)]="form.category"
+          required
+        >
+          @for (category of availableCategories; track category) {
+            <option [value]="category">{{ category }}</option>
+          }
+        </select>
+
+        <!-- 新增類別按鈕 -->
+        <button
+          type="button"
+          class="add-category-button"
+          (click)="openAddCategoryForm()"
+        >
+          + Add Category
+        </button>
+
+        <!-- 展開新增類別表單 -->
+        @if (showAddCategoryForm) {
+          <div class="add-category-form">
+            <h3>Add New Category</h3>
+
+            <label for="newCategoryName">Category Name</label>
+            <input
+              id="newCategoryName"
+              name="newCategoryName"
+              type="text"
+              [(ngModel)]="newCategoryName"
+              placeholder="e.g. Food & Dining"
+              required
+            />
+
+            <label for="newCategoryType">Category Type</label>
+            <select
+              id="newCategoryType"
+              name="newCategoryType"
+              [(ngModel)]="newCategoryType"
+              required
+            >
+              <option value="Expense">Expense</option>
+              <option value="Income">Income</option>
+            </select>
+
+            <div class="modal-actions">
+              <button
+                type="button"
+                class="cancel-button"
+                (click)="cancelAddCategory()"
+              >
+                Cancel
+              </button>
+
+              <button
+                type="button"
+                class="add-button"
+                (click)="saveCategory()"
+              >
+                Save Category
+              </button>
+            </div>
+          </div>
+        }
+
+
+        <label for="description">Description</label>
+        <input
+          id="description"
+          name="description"
+          [(ngModel)]="form.description"
+          placeholder="e.g. Lunch"
+          required
+        />
+
+
+
+        <label for="amount">Amount (NT$)</label>
+        <input
+          id="amount"
+          name="amount"
+          type="number"
+          min="0.01"
+          step="0.01"
+          [(ngModel)]="form.amount"
+          required
+        />
+
+        <label for="paymentMethod">Payment Method</label>
+        <select
+          id="paymentMethod"
+          name="paymentMethod"
+          [(ngModel)]="form.paymentMethod"
+        >
+          <option value="Cash">Cash</option>
+          <option value="Credit Card">Credit Card</option>
+          <option value="Debit Card">Debit Card</option>
+          <option value="Bank Transfer">Bank Transfer</option>
+          <option value="Other">Other</option>
+        </select>
+
+
+
+        <div class="modal-actions">
+          <button
+            type="button"
+            class="cancel-button"
+            (click)="closeForm()"
+          >
+            Cancel
+          </button>
+
+          <button type="submit" class="add-button">
+            Save Transaction
+          </button>
+        </div>
+      </form>
+    </section>
+  </div>
+}

@@ -1,0 +1,153 @@
+
+<div class="debts-page">
+
+  <header class="page-header">
+    <div>
+      <h1>Debts</h1>
+      <p>Keep track of money you owe and money owed to you.</p>    
+    </div>
+
+    <app-debt-form
+      (debtAdded)="addDebt($event)">
+    </app-debt-form>
+  </header>
+
+  
+<section class="summary-cards">
+  <div class="summary-card">
+    <h3>Total Debt</h3>
+    <p class="amount">
+      NT$ {{ totalDebt.toLocaleString() }}
+    </p>
+    <span>Total amount I owe</span>
+  </div>
+
+  <div class="summary-card">
+    <h3>I Owe To</h3>
+    <p class="amount">{{ peopleIOweCount }}</p>
+    <span>People I owe money to</span>
+  </div>
+
+  <div class="summary-card">
+    <h3>Owe To Me</h3>
+    <p class="amount">{{ peopleOweMeCount }}</p>
+    <span>People who owe me money</span>
+  </div>
+</section>
+
+
+  <section class="content-section">
+    <div class="section-header">
+      <div>
+        <h2>Debt Records</h2>
+        <p>View your debt records.</p>
+      </div>
+    </div>
+
+
+    <table>
+      <thead>
+        <tr>
+          <th>Person</th>
+          <th>Settlement</th>
+          <th>Records</th>
+          <th>Total Amount</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (group of groupedDebts; track group.key) {
+          <tr>
+            <td>
+              <button
+                type="button"
+                class="person-toggle"
+                (click)="toggleGroup(group.key)"
+              >
+                <span class="person-avatar">
+                  {{ (group.debtorName ?? 'U').charAt(0).toUpperCase() }}
+                </span>
+
+                <span class="person-name">
+                  {{ group.debtorName ?? 'Unknown' }}
+                </span>
+
+                <span class="person-arrow">
+                  {{ expandedGroupKey() === group.key ? '⌄' : '›' }}
+                </span>
+              </button>
+            </td>
+
+            <td>
+              {{ getBalanceLabel(group.balance) }}
+            </td>
+
+            <td>{{ group.records.length }} records</td>
+
+            <td>
+              NT$ {{ getBalanceAmount(group.balance).toLocaleString('en-US') }}
+            </td>
+          </tr>
+
+          @if (expandedGroupKey() === group.key) {
+            <tr>
+              <td colspan="4">
+                <div class="debt-details">
+                  @for (record of group.records; track record.id) {
+                    <div class="debt-detail-row">
+                      <div>
+                        <strong>
+                          {{ record.description ?? 'No description' }}
+                        </strong>
+
+                        <p>
+                          {{ record.debtType === 'I_OWE' ? '我欠對方' : '對方欠我' }}
+                        </p>
+
+                        <p>{{ record.date ?? '-' }}</p>
+                      </div>
+
+                      
+                    <div class="debt-record-actions">
+                      <strong>
+                        NT$ {{ record.amount.toLocaleString('en-US') }}
+                      </strong>
+
+                      <span class="debt-status">
+                        @if (record.status === 'PAID') {
+                          已還款
+                        } @else if (record.status === 'RECEIVED') {
+                          已收到款項
+                        } @else {
+                          尚未結清
+                        }
+                      </span>
+
+                      @if (record.status === 'UNPAID') {
+                        <button
+                          type="button"
+                          class="settle-button"
+                          (click)="markDebtSettled(record)"
+                        >
+                          {{ record.debtType === 'I_OWE' ? 'Mark as Paid' : 'Mark as Received' }}
+                        </button>
+                      }
+                    </div>
+
+                    </div>
+                  }
+                </div>
+              </td>
+            </tr>
+          }
+        } @empty {
+          <tr>
+            <td colspan="4">No debt records yet.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+  </section>
+
+</div>

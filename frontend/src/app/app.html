@@ -1,0 +1,44 @@
+
+<div class="app-container">
+
+  <!-- 左側導覽列 -->
+  <aside class="sidebar">
+    <h2 class="logo">MyExpense</h2>
+
+    <nav>
+      <a
+        class="nav-item"
+        routerLink="/overview"
+        routerLinkActive="active">
+        Overview
+      </a>
+
+      <a
+        class="nav-item"
+        routerLink="/transactions"
+        routerLinkActive="active">
+        Transactions
+      </a>
+
+      <a
+        class="nav-item"
+        routerLink="/debts"
+        routerLinkActive="active">
+        Debts
+      </a>
+
+      <a
+        class="nav-item"
+        routerLink="/budgets"
+        routerLinkActive="active">
+        Budgets
+      </a>
+    </nav>
+  </aside>
+
+  <!-- 右側主要內容 -->
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+
+</div>

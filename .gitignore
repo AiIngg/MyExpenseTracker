@@ -1,0 +1,30 @@
+
+# Angular dependencies and build outputs
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+
+# .NET build outputs
+backend/bin/
+backend/obj/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+backend/appsettings.Development.json
+
+# IDE and operating system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Database exports and local backups
+*.dmp
+*.db
+*.sqlite
+
+# Local database credentials
+backend/appsettings.json
+backend/appsettings.Development.json

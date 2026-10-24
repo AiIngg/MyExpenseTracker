@@ -1,0 +1,173 @@
+
+<div class="transactions-page">
+
+  <header class="page-header">
+    <div>
+      <h1>Transactions</h1>
+      <p>Manage your income and expenses.</p>
+    </div>
+
+    <app-transaction-form
+      [showForm]="showForm"
+      [editingId]="editingId"
+      [form]="form"
+      (addClicked)="openAddForm()"
+      (closeClicked)="closeForm()"
+      (saveClicked)="saveTransaction()">
+    </app-transaction-form>
+  </header>
+
+
+
+
+
+    
+    <!-- Monthly Expense Calendar -->
+    <div class="calendar-section">
+      <div class="calendar-header">
+        <h2>Daily Expenses</h2>
+
+        <div class="calendar-navigation">
+          <button
+            type="button"
+            class="calendar-nav-button"
+            (click)="changeCalendarMonth(-1)">
+            ‹
+          </button>
+
+          <h3>{{ calendarMonthLabel }}</h3>
+
+          <button
+            type="button"
+            class="calendar-nav-button"
+            (click)="changeCalendarMonth(1)">
+            ›
+          </button>
+        </div>
+      </div>
+
+      <div class="calendar-grid">
+        @for (weekday of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']; track weekday) {
+          <div class="calendar-weekday">{{ weekday }}</div>
+        }
+
+        @for (day of calendarDays; track $index) {
+          @if (day) {
+            <div class="calendar-day">
+              <span class="calendar-day-number">{{ day.day }}</span>
+
+              @if (dailyExpenses[day.date] !== undefined) {
+                <span class="calendar-expense">
+                  NT$ {{ dailyExpenses[day.date] | number }}
+                </span>
+              }
+            </div>
+          } @else {
+            <div class="calendar-day calendar-empty"></div>
+          }
+        }
+      </div>
+    </div>
+
+
+    <section class="content-section">
+    <div class="section-header">
+      <div>
+        <h2>Transaction History</h2>
+        <p>{{ filteredTransactions.length }} transactions found</p>
+      </div>
+    </div>
+    
+    <div class="filters">
+      <input
+        type="text"
+        placeholder="Search description, category, or person..."
+        [(ngModel)]="searchText"
+      />
+
+      <select [(ngModel)]="selectedType">
+        <option value="All">All Types</option>
+        <option value="Income">Income</option>
+        <option value="Expense">Expense</option>
+      </select>
+
+      <select [(ngModel)]="selectedCategory">
+        <option value="All">All Categories</option>
+        <option value="Income">Income</option>
+        <option value="Food & Dining">Food & Dining</option>
+        <option value="Transportation">Transportation</option>
+        <option value="Shopping">Shopping</option>
+        <option value="Entertainment">Entertainment</option>
+        <option value="Others">Others</option>
+      </select>
+
+      <select [(ngModel)]="sortOrder">
+        <option value="newest">Newest First</option>
+        <option value="oldest">Oldest First</option>
+        <option value="highest">Amount: High to Low</option>
+        <option value="lowest">Amount: Low to High</option>
+      </select>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Payment Method</th>
+            <th>Amount</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (transaction of filteredTransactions; track transaction.id) {
+            <tr>
+              <td>{{ transaction.description }}</td>
+              <td>
+                <span class="category-label">
+                  {{ transaction.category }}
+                </span>
+              </td>
+              <td>{{ transaction.date }}</td>
+              <td>{{ transaction.paymentMethod }}</td>
+              <td
+                [class.income-amount]="transaction.type === 'Income'"
+                [class.expense-amount]="transaction.type === 'Expense'"
+              >
+                {{ transaction.type === 'Income' ? '+' : '-' }}
+                NT$ {{ transaction.amount | number }}
+              </td>
+              <td>
+                <div class="action-buttons">
+                  <button
+                    class="edit-button"
+                    (click)="editTransaction(transaction)"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    class="delete-button"
+                    (click)="deleteTransaction(transaction.id)"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="7" class="empty-message">
+                No transactions found.
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+
+</div>

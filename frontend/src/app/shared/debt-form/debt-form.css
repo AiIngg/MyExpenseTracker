@@ -1,0 +1,234 @@
+
+/* Add Debt button */
+.add-button,
+.save-button {
+  padding: 10px 18px;
+  background-color: #6F8974;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.add-button:hover,
+.save-button:hover {
+  background-color: #526B5C;
+}
+
+/* Modal background */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: rgba(15, 23, 42, 0.5);
+  overflow-y: auto;
+}
+
+/* Modal container */
+.debt-modal {
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 28px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.debt-modal h2 {
+  margin: 0 0 8px;
+  color: #1e293b;
+  font-size: 22px;
+}
+
+.form-description {
+  margin: 0 0 20px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+/* Labels */
+.debt-modal label {
+  display: block;
+  margin: 14px 0 6px;
+  color: #334155;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Input fields */
+.debt-modal input,
+.debt-modal select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background-color: white;
+  color: #1e293b;
+  font-size: 14px;
+}
+
+.debt-modal input:focus,
+.debt-modal select:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+/* Bottom buttons */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.cancel-button {
+  padding: 10px 18px;
+  background-color: white;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.cancel-button:hover {
+  background-color: #f1f5f9;
+}
+
+/* Mobile layout */
+@media (max-width: 480px) {
+  .debt-modal {
+    padding: 20px;
+  }
+
+  .modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .modal-actions button {
+    width: 100%;
+  }
+}
+
+
+
+
+/* Person 下拉選單與新增按鈕 */
+.person-select-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.person-select-row select {
+  flex: 1;
+  min-width: 0;
+}
+
+/* + Add New Person */
+.add-person-button {
+  flex-shrink: 0;
+  padding: 10px 14px;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  background-color: #f0fdf4;
+  color: #15803d;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add-person-button:hover {
+  background-color: #dcfce7;
+  border-color: #86efac;
+}
+
+/* 新增欠款人的輸入區域 */
+.new-person-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.new-person-row input {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Add */
+.confirm-person-button {
+  padding: 10px 18px;
+  border: 1px solid #15803d;
+  border-radius: 8px;
+  background-color: #15803d;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.confirm-person-button:hover:not(:disabled) {
+  background-color: #166534;
+}
+
+.confirm-person-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Cancel */
+.cancel-person-button {
+  padding: 10px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #4b5563;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancel-person-button:hover {
+  background-color: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+/* 小螢幕避免按鈕擠在一起 */
+@media (max-width: 480px) {
+  .person-select-row {
+    flex-wrap: wrap;
+  }
+
+  .person-select-row select {
+    flex-basis: 100%;
+  }
+
+  .add-person-button {
+    width: 100%;
+  }
+
+  .new-person-row {
+    flex-wrap: wrap;
+  }
+
+  .new-person-row input {
+    flex-basis: 100%;
+  }
+}
+

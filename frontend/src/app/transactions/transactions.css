@@ -1,0 +1,440 @@
+
+.transactions-page {
+  color: #5F5145;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.page-header h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+
+.page-header p {
+  margin: 0;
+  color: #9A8D80;
+}
+
+.add-button {
+  background-color: #A88A6C;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 18px;
+  cursor: pointer;
+}
+
+.add-button:hover {
+  background-color: #927456;
+}
+
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.summary-card {
+  background-color: #FFFDF9;
+  border: 1px solid #EAE1D7;
+  border-radius: 16px;
+  padding: 24px;
+  min-width: 0;
+}
+
+.summary-card p {
+  margin: 0 0 16px;
+  color: #8D7B6A;
+}
+
+.summary-card h2 {
+  margin: 0 0 10px;
+  font-size: 24px;
+  overflow-wrap: anywhere;
+}
+
+.summary-card span {
+  color: #A3988D;
+  font-size: 13px;
+}
+
+.income-amount {
+  color: #64866B;
+}
+
+.expense-amount {
+  color: #B56F61;
+}
+
+.content-section {
+  background-color: #FFFDF9;
+  border: 1px solid #EAE1D7;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.section-header {
+  margin-bottom: 20px;
+}
+
+.section-header h2 {
+  margin: 0 0 8px;
+  font-size: 19px;
+}
+
+.section-header p {
+  margin: 0;
+  color: #9A8D80;
+  font-size: 14px;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: minmax(180px, 2fr) repeat(3, minmax(130px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.filters input,
+.filters select,
+.transaction-modal input,
+.transaction-modal select {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 11px 12px;
+  border: 1px solid #E2D6C9;
+  border-radius: 8px;
+  background-color: #FFFEFC;
+  color: #5F5145;
+  font: inherit;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  white-space: nowrap;
+}
+
+th,
+td {
+  padding: 15px 12px;
+  border-bottom: 1px solid #F0E9E0;
+}
+
+th {
+  color: #958575;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+td {
+  font-size: 14px;
+}
+
+.category-label {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 8px;
+  background-color: #E8EDE2;
+  color: #65775E;
+  font-size: 12px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-button,
+.delete-button,
+.cancel-button {
+  border: none;
+  border-radius: 7px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.edit-button {
+  background-color: #E8E0D5;
+  color: #6F5A45;
+}
+
+.delete-button {
+  background-color: #F4E3DF;
+  color: #A35D52;
+}
+
+.empty-message {
+  text-align: center;
+  padding: 32px;
+  color: #9A8D80;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: rgb(50 40 30 / 45%);
+  overflow-y: auto;
+}
+
+.transaction-modal {
+  width: 100%;
+  max-width: 480px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 28px;
+  border-radius: 18px;
+  background-color: #FFFDF9;
+  color: #5F5145;
+}
+
+.transaction-modal h2 {
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+.transaction-modal form {
+  display: grid;
+  gap: 10px;
+}
+
+.transaction-modal label {
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.cancel-button {
+  background-color: #EEE6DC;
+  color: #6F5A45;
+}
+
+@media (max-width: 1000px) {
+  .summary-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .page-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .filters {
+    grid-template-columns: 1fr;
+  }
+
+  .content-section {
+    padding: 16px;
+  }
+}
+
+
+/* ==============================
+   Monthly Expense Calendar
+============================== */
+
+.calendar-section {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.calendar-header h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.calendar-navigation {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.calendar-navigation h3 {
+  min-width: 115px;
+  margin: 0;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.calendar-nav-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid #e5e7eb;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #374151;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.calendar-nav-button:hover {
+  background: #f3f4f6;
+  border-color: #cbd5e1;
+}
+
+/* 月曆七欄排列 */
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.calendar-weekday {
+  padding: 12px 4px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+  background: #f9fafb;
+  border-radius: 8px;
+}
+
+/* 日期格 */
+
+.calendar-day {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+  min-height: 92px;
+  padding: 12px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  transition: background 0.2s, border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.calendar-day:not(.calendar-empty):hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+}
+
+.calendar-day-number {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* 每日支出金額 */
+
+.calendar-expense {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: 700;
+  color: #dc2626;
+}
+
+/* 月初的空白日期格 */
+
+.calendar-empty {
+  background: #f9fafb;
+  border-color: transparent;
+}
+
+/* 手機版 */
+
+@media (max-width: 768px) {
+  .calendar-section {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .calendar-section {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 22px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+  }
+
+  .calendar-navigation {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .calendar-navigation h3 {
+    min-width: 0;
+  }
+
+  .calendar-grid {
+    gap: 4px;
+  }
+
+  .calendar-weekday {
+    padding: 8px 2px;
+    font-size: 11px;
+  }
+
+  .calendar-day {
+    min-height: 72px;
+    padding: 6px 4px;
+    gap: 8px;
+    border-radius: 7px;
+  }
+
+  .calendar-day-number {
+    font-size: 12px;
+  }
+
+  .calendar-expense {
+    font-size: 10px;
+  }
+}

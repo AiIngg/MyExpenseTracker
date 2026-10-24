@@ -1,0 +1,155 @@
+
+/* Add Transaction button */
+.add-button {
+  padding: 10px 18px;
+  background-color: #6F8974;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.add-button:hover {
+  background-color: #526B5C;
+}
+
+/* Dark background behind the modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+/* Modal container */
+.transaction-modal {
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background-color: white;
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+
+.transaction-modal h2 {
+  margin: 0 0 24px;
+  font-size: 22px;
+  color: #1e293b;
+}
+
+/* Form labels */
+.transaction-modal label {
+  display: block;
+  margin: 14px 0 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+/* Form inputs and dropdowns */
+.transaction-modal input,
+.transaction-modal select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background-color: white;
+  color: #1e293b;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.transaction-modal input:focus,
+.transaction-modal select:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+/* Modal action buttons */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.cancel-button {
+  padding: 10px 18px;
+  background-color: white;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.cancel-button:hover {
+  background-color: #f1f5f9;
+}
+
+/* Responsive layout for small screens */
+@media (max-width: 480px) {
+  .transaction-modal {
+    padding: 20px;
+  }
+
+  .modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .modal-actions button {
+    width: 100%;
+  }
+}
+
+/* Add Category button */
+.add-category-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  margin-top: 8px;
+  padding: 9px 14px;
+
+  background-color: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* 滑鼠移上去 */
+.add-category-button:hover {
+  background-color: #dcfce7;
+  border-color: #86efac;
+  color: #166534;
+}
+
+/* 按下按鈕 */
+.add-category-button:active {
+  transform: scale(0.98);
+}
+
+/* 鍵盤操作時的焦點效果 */
+.add-category-button:focus-visible {
+  outline: 2px solid #22c55e;
+  outline-offset: 2px;
+}

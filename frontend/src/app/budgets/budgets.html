@@ -1,0 +1,148 @@
+
+<div class="budgets-page">
+  <header class="page-header">
+    <div>
+      <h1>Budget</h1>
+      <p>Manage your monthly spending limits.</p>
+    </div>
+
+    <div class="month-selector">
+      <label for="budget-month">Month</label>
+      <input
+        id="budget-month"
+        type="month"
+        [(ngModel)]="selectedMonth"
+        (ngModelChange)="onMonthChange()"
+      />
+    </div>
+  </header>
+
+  <!-- Summary cards -->
+  <section class="summary-grid">
+    <div class="summary-card">
+      <p class="card-label">Total Budget</p>
+      <h2>NT$ {{ totalBudget | number }}</h2>
+      <p class="card-description">Your planned monthly spending</p>
+    </div>
+
+    <div class="summary-card">
+      <p class="card-label">Total Spent</p>
+      <h2>NT$ {{ totalSpent | number }}</h2>
+      <p class="card-description">Your spending this month</p>
+    </div>
+
+    <div class="summary-card">
+      <p class="card-label">Remaining Budget</p>
+      <h2 [class.over-budget-text]="remainingBudget < 0">
+        NT$ {{ remainingBudget | number }}
+      </h2>
+      <p class="card-description">Budget left to spend</p>
+    </div>
+  </section>
+
+  <!-- Category budgets -->
+  <section class="budget-section">
+    <div class="section-header">
+      <div>
+        <h2>Budget by Category</h2>
+        <p>Track how much you spend in each category.</p>
+      </div>
+    </div>
+
+    <div class="budget-list">
+      @for (budget of budgets; track budget.category) {
+        <article class="budget-item">
+          <div class="budget-item-header">
+            <div>
+              <h3>{{ budget.category }}</h3>
+              
+              @if (editingBudgetId === budget.id) {
+                <div class="budget-edit-form">
+                  <label [for]="'budget-limit-' + budget.id">
+                    Monthly limit (NT$)
+                  </label>
+
+                  <input
+                    [id]="'budget-limit-' + budget.id"
+                    type="number"
+                    min="0.01"
+                    step="0.01"
+                    [(ngModel)]="editedLimit"
+                  />
+
+                  <div class="budget-edit-actions">
+                    <button
+                      type="button"
+                      class="save-button"
+                      (click)="saveBudget(budget)"
+                    >
+                      Save
+                    </button>
+
+                    <button
+                      type="button"
+                      class="cancel-button"
+                      (click)="cancelEditBudget()"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              } @else {
+                <p class="budget-amount">
+                  NT$ {{ budget.spent | number }}
+                  <span>/ NT$ {{ budget.limit | number }}</span>
+                </p>
+
+                <button
+                  type="button"
+                  class="edit-button"
+                  (click)="startEditBudget(budget)"
+                >
+                  Edit
+                </button>
+              }
+
+            </div>
+
+            <span
+              class="usage-badge"
+              [class.over-budget-badge]="isOverBudget(budget)"
+            >
+              {{ getUsagePercentage(budget) | number:'1.0-0' }}%
+            </span>
+          </div>
+
+          
+        <div class="progress-track">
+          <div
+            class="progress-fill"
+            [class.warning-fill]="getUsagePercentage(budget) >= 80 && getUsagePercentage(budget) < 90"
+            [class.high-warning-fill]="getUsagePercentage(budget) >= 90 && getUsagePercentage(budget) < 100"
+            [class.over-budget-fill]="isOverBudget(budget)"
+            [style.width.%]="
+              getUsagePercentage(budget) > 100
+                ? 100
+                : getUsagePercentage(budget)
+            "
+          ></div>
+        </div>
+
+
+          <div class="budget-item-footer">
+            @if (isOverBudget(budget)) {
+              <span class="over-budget-message">
+                Over budget by NT$
+                {{ budget.spent - budget.limit | number }}
+              </span>
+            } @else {
+              <span class="remaining-message">
+                NT$ {{ budget.limit - budget.spent | number }} remaining
+              </span>
+            }
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+</div>

@@ -1,0 +1,159 @@
+
+<button
+  type="button"
+  class="add-button"
+  (click)="openAddForm()"
+>
+  + Add Debt
+</button>
+
+@if (showForm) {
+  <div class="modal-backdrop" (click)="closeForm()">
+    <section
+      class="debt-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="debt-form-title"
+      (click)="$event.stopPropagation()"
+    >
+      <h2 id="debt-form-title">Add Debt</h2>
+      <p class="form-description">
+        Record money you owe to someone.
+      </p>
+
+      <form (ngSubmit)="saveDebt()">
+
+        <label for="date">Date</label>
+        <input
+          id="date"
+          name="date"
+          type="date"
+          [(ngModel)]="form.date"
+          required
+        />
+
+        
+    <label for="person">Person</label>
+
+    <div class="person-select-row">
+      <select
+        id="person"
+        name="person"
+        [(ngModel)]="form.debtorId"
+        required
+      >
+        <option [ngValue]="null" disabled>
+          Select a person
+        </option>
+
+        @for (debtor of debtors; track debtor.id) {
+          <option [ngValue]="debtor.id">
+            {{ debtor.name }}
+          </option>
+        }
+      </select>
+
+      <button
+        type="button"
+        class="add-person-button"
+        (click)="showNewDebtorInput = !showNewDebtorInput"
+      >
+        + Add New Person
+      </button>
+    </div>
+
+@if (showNewDebtorInput) {
+  <div class="new-person-row">
+    <input
+      type="text"
+      name="newDebtorName"
+      [(ngModel)]="newDebtorName"
+      placeholder="Enter person's name"
+      maxlength="100"
+    />
+
+    <button
+      type="button"
+      class="confirm-person-button"
+      [disabled]="isCreatingDebtor"
+      (click)="createDebtor()"
+    >
+    Add
+  </button>
+
+    <button
+      type="button"
+      class="cancel-person-button"
+      (click)="showNewDebtorInput = false; newDebtorName = ''"
+    >
+      Cancel
+    </button>
+  </div>
+}
+
+        
+
+
+        <label for="description">Description</label>
+        <input
+          id="description"
+          name="description"
+          type="text"
+          [(ngModel)]="form.description"
+          placeholder="e.g. Dinner"
+          required
+        />
+
+
+
+        <label for="amount">Amount Owed (NT$)</label>
+        <input
+          id="amount"
+          name="amount"
+          type="number"
+          min="0.01"
+          step="0.01"
+          [(ngModel)]="form.amount"
+          required
+        />
+
+        
+        <label for="debtType">Debt Type</label>
+        <select
+          id="debtType"
+          name="debtType"
+          [(ngModel)]="form.debtType"
+          required
+        >
+          <option value="I_OWE">我欠對方</option>
+          <option value="OWED_TO_ME">對方欠我</option>
+        </select>
+
+        <label for="status">Status</label>
+        <select
+          id="status"
+          name="status"
+          [(ngModel)]="form.status"
+          required
+        >
+          <option value="Unpaid">Unpaid</option>
+          <option value="Paid">Paid</option>
+        </select>
+
+        <div class="modal-actions">
+          <button
+            type="button"
+            class="cancel-button"
+            (click)="closeForm()"
+          >
+            Cancel
+          </button>
+
+          <button type="submit" class="save-button">
+            Save Debt
+          </button>
+        </div>
+      </form>
+    </section>
+  </div>
+}

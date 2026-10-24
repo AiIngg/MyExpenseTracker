@@ -1,0 +1,355 @@
+/* Budget 頁面 */
+.budgets-page {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: #514f4b;
+}
+
+/* 頁面標題與月份選擇 */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.page-header h1 {
+  margin: 0 0 8px;
+  color: #514f4b;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.page-header p,
+.section-header p {
+  margin: 0;
+  color: #918b83;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* 月份選擇器 */
+.month-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.month-selector label {
+  color: #77736d;
+  font-size: 13px;
+}
+
+.month-selector input {
+  min-height: 42px;
+  padding: 9px 12px;
+  border: 1px solid #ddd5ca;
+  border-radius: 8px;
+  background-color: #fcfaf7;
+  color: #514f4b;
+  font: inherit;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.month-selector input:focus {
+  border-color: #829789;
+  box-shadow: 0 0 0 3px rgba(130, 151, 137, 0.15);
+}
+
+/* 三張摘要卡片 */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.summary-card {
+  min-width: 0;
+  padding: 24px;
+  background-color: #fcfaf7;
+  border: 1px solid #e8e0d6;
+  border-radius: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.summary-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(81, 79, 75, 0.06);
+}
+
+.card-label {
+  margin: 0 0 14px;
+  color: #918b83;
+  font-size: 14px;
+}
+
+.summary-card h2 {
+  margin: 0 0 12px;
+  color: #5c665d;
+  font-size: 25px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.card-description {
+  margin: 0;
+  color: #a19a91;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* 超出總預算時 */
+.over-budget-text {
+  color: #b77979 !important;
+}
+
+/* 分類預算區塊 */
+.budget-section {
+  padding: 28px;
+  background-color: #fcfaf7;
+  border: 1px solid #e8e0d6;
+  border-radius: 12px;
+}
+
+.section-header {
+  margin-bottom: 26px;
+}
+
+.section-header h2 {
+  margin: 0 0 8px;
+  color: #514f4b;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* 預算分類清單 */
+.budget-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.budget-item {
+  padding-bottom: 24px;
+  border-bottom: 1px solid #eee7df;
+}
+
+.budget-item:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+/* 分類名稱、金額與使用率 */
+.budget-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.budget-item h3 {
+  margin: 0 0 8px;
+  color: #514f4b;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.budget-amount {
+  margin: 0;
+  color: #5c665d;
+  font-size: 14px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.budget-amount span {
+  color: #a19a91;
+  font-weight: 400;
+}
+
+/* 使用率標籤 */
+.usage-badge {
+  flex-shrink: 0;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background-color: #e7ede6;
+  color: #526b5c;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.over-budget-badge {
+  background-color: #f3e4e2;
+  color: #a85f5f;
+}
+
+/* 預算使用進度條 */
+.progress-track {
+  width: 100%;
+  height: 10px;
+  background-color: #eae5dd;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #829a83;
+  border-radius: 20px;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+/* 使用率達到 80%：柔和橘色 */
+.progress-fill.warning-fill {
+  background-color: #d8b27e;
+}
+
+/* 使用率達到 90%：較深的暖棕色 */
+.progress-fill.high-warning-fill {
+  background-color: #b58e69;
+}
+
+/* 已經超出預算 */
+.progress-fill.over-budget-fill {
+  background-color: #c98787;
+}
+
+/* 剩餘金額或超支提示 */
+.budget-item-footer {
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.remaining-message {
+  color: #918b83;
+}
+
+.over-budget-message {
+  color: #b77979;
+  font-weight: 600;
+}
+
+/* 平板版 */
+@media (max-width: 900px) {
+  .summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .summary-card:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* 手機版 */
+@media (max-width: 600px) {
+  .budgets-page {
+    padding: 0;
+  }
+
+  .page-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .month-selector {
+    width: 100%;
+  }
+
+  .month-selector input {
+    width: 100%;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .summary-card:last-child {
+    grid-column: auto;
+  }
+
+  .summary-card {
+    padding: 20px;
+  }
+
+  .summary-card h2 {
+    font-size: 23px;
+  }
+
+  .budget-section {
+    padding: 20px;
+  }
+
+  .budget-item-header {
+    gap: 10px;
+  }
+}
+
+
+
+.budget-edit-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.budget-edit-form label {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.budget-edit-form input {
+  width: 150px;
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.budget-edit-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-button,
+.save-button,
+.cancel-button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.edit-button {
+  margin-top: 8px;
+}
+
+.edit-button,
+.save-button {
+  background-color: #6F8974;
+  color: white;
+}
+
+.edit-button:hover,
+.save-button:hover {
+  background-color: #526B5C;
+}
+
+.cancel-button {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.cancel-button:hover {
+  background-color: #d1d5db;
+}

@@ -1,0 +1,100 @@
+
+<div class="overview-page">
+  <header class="page-header">
+    <div>
+      <h1>Overview</h1>
+      <p>Welcome back! Here is your financial summary.</p>
+    </div>
+
+    <app-transaction-form
+      [showForm]="showForm"
+      [editingId]="editingId"
+      [form]="form"
+      (addClicked)="openAddForm()"
+      (closeClicked)="closeForm()"
+      (saveClicked)="saveTransaction()">
+    </app-transaction-form>
+  </header>
+
+  <!-- 金額摘要卡片 -->
+  <section class="summary-cards">
+
+    <div class="summary-card">
+      <p>Monthly Spending</p>
+      <h2>NT$ {{ getMonthlySpending().toLocaleString('en-US') }}</h2>
+      <span>This month</span>
+    </div>
+
+    <div class="summary-card">
+      <p>Monthly Income</p>
+      <h2>NT$ {{ getMonthlyIncome().toLocaleString('en-US') }}</h2>
+      <span>This month</span>
+    </div>
+
+    <div class="summary-card">
+      <p>Monthly Balance</p>
+      <h2>
+        NT$ {{ (getMonthlyIncome() - getMonthlySpending()).toLocaleString('en-US') }}
+      </h2>
+      <span>37.5% remaining</span>
+    </div>
+
+  </section>
+
+  <!-- 支出分類 -->
+  <section class="content-section spending-section">
+    <h2>Spending by Category</h2>
+
+    @if (getSpendingByCategory().length > 0) {
+      <div class="spending-layout">
+
+        <!-- 圓環圖 -->
+        <div
+          class="donut-chart"
+          [style.background]="categoryChartBackground()">
+
+          <div class="donut-center">
+            <span>Total Spending</span>
+            <strong>
+              NT$ {{ getTotalSpending().toLocaleString('en-US') }}
+            </strong>
+          </div>
+
+        </div>
+
+        <!-- 類別明細 -->
+        <div class="category-list">
+          @for (item of getSpendingByCategory(); track item.categoryId) {
+            <div class="category-item">
+
+              <div class="category-info">
+                <div class="category-name">
+                  <span
+                    class="category-dot"
+                    [style.background-color]="item.color">
+                  </span>
+
+                  <span>{{ item.name }}</span>
+                </div>
+
+                <strong>
+                  NT$ {{ item.amount.toLocaleString('en-US') }}
+                </strong>
+              </div>
+
+              <span class="category-percentage">
+                {{ item.percentage.toFixed(1) }}%
+              </span>
+
+            </div>
+          }
+        </div>
+
+      </div>
+    } @else {
+      <p class="empty-message">
+        No spending records yet.
+      </p>
+    }
+  </section>
+</div>

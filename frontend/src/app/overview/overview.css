@@ -1,0 +1,236 @@
+/* Overview 頁面 */
+.overview-page {
+  width: 100%;
+  color: #514f4b;
+}
+
+/* 頁面標題 */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.page-header h1 {
+  margin: 0 0 8px;
+  color: #514f4b;
+}
+
+.page-header p {
+  color: #918b83;
+  margin: 0;
+}
+
+/* 新增交易按鈕 */
+.add-button {
+  background-color: #829789;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 18px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.add-button:hover {
+  background-color: #6f8577;
+}
+
+/* 摘要卡片 */
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.summary-card {
+  background-color: #fcfaf7;
+  border: 1px solid #e8e0d6;
+  border-radius: 12px;
+  padding: 24px;
+  min-width: 0;
+}
+
+.summary-card p {
+  color: #918b83;
+  margin: 0 0 15px;
+}
+
+.summary-card h2 {
+  font-size: 25px;
+  color: #5c665d;
+  margin: 0 0 12px;
+  overflow-wrap: anywhere;
+}
+
+.summary-card span {
+  color: #a19a91;
+  font-size: 13px;
+}
+
+/* 內容區塊 */
+.content-section {
+  background-color: #fcfaf7;
+  border: 1px solid #e8e0d6;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 25px;
+}
+
+.content-section h2 {
+  font-size: 19px;
+  color: #514f4b;
+  margin: 0 0 24px;
+}
+
+/* Spending by Category 排版 */
+.spending-layout {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  align-items: center;
+  gap: 36px;
+}
+
+/* 圓環圖 */
+.donut-chart {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* 圓環圖中心 */
+.donut-center {
+  position: absolute;
+  inset: 23%;
+  border-radius: 50%;
+  background-color: #fcfaf7;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 8px;
+}
+
+.donut-center span {
+  color: #9a8d80;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.donut-center strong {
+  color: #526b5c;
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+/* 分類清單 */
+.category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+.category-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 0;
+}
+
+.category-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #5f5145;
+  font-size: 14px;
+}
+
+.category-info strong {
+  white-space: nowrap;
+}
+
+.category-name {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+}
+
+.category-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.category-percentage {
+  color: #9a8d80;
+  font-size: 12px;
+  align-self: flex-end;
+}
+
+/* 沒有支出資料時的提示 */
+.empty-message {
+  color: #918b83;
+  margin: 0;
+  font-size: 14px;
+}
+
+/* 平板與手機版 */
+@media (max-width: 900px) {
+  .summary-cards {
+    gap: 14px;
+  }
+
+  .summary-card {
+    padding: 18px;
+  }
+
+  .summary-card h2 {
+    font-size: 21px;
+  }
+
+  .spending-layout {
+    grid-template-columns: 200px minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .donut-chart {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media (max-width: 700px) {
+  .page-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .summary-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .spending-layout {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 28px;
+  }
+
+  .donut-chart {
+    width: 220px;
+    height: 220px;
+  }
+
+  .category-list {
+    width: 100%;
+  }
+}

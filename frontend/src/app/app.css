@@ -1,0 +1,77 @@
+/* 全域設定 */
+* {
+  box-sizing: border-box;
+}
+
+:host {
+  display: block;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  color: #514f4b;
+}
+
+/* 網站背景與整體版面 */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f5f1eb;
+}
+
+/* 左側導覽列 */
+.sidebar {
+  width: 230px;
+  flex-shrink: 0;
+  background-color: #e9e4dc;
+  padding: 30px 20px;
+  border-right: 1px solid #ddd5ca;
+}
+
+/* 網站 Logo */
+.logo {
+  color: #687d70;
+  margin: 0 0 40px;
+}
+
+/* 導覽選單 */
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-item {
+  display: block;
+  padding: 13px 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #77736d;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+/* 滑鼠移入與目前選中的頁面 */
+.nav-item:hover,
+.nav-item.active {
+  background-color: #d5ded5;
+  color: #526b5c;
+}
+
+/* 右側主要內容 */
+.main-content {
+  flex: 1;
+  min-width: 0;
+  padding: 35px;
+}
+
+/* 平板與手機版 */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 150px;
+    padding: 20px 10px;
+  }
+
+  .main-content {
+    padding: 20px 12px;
+  }
+}
