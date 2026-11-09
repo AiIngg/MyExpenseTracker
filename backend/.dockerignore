@@ -1,0 +1,12 @@
+**/bin/
+**/obj/
+.git
+cwallet.sso
+ewallet.p12
+ewallet.pem
+keystore.jks
+truststore.jks
+sqlnet.ora
+tnsnames.ora
+ojdbc.properties
+Wallet_MYEXPENSEDB/

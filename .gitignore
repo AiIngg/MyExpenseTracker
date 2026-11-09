@@ -28,3 +28,9 @@ Thumbs.db
 # Local database credentials
 backend/appsettings.json
 backend/appsettings.Development.json
+
+# Oracle Cloud Wallet - NEVER upload credentials to GitHub
+Wallet_MYEXPENSEDB/
+Wallet_MYEXPENSEDB.zip
+
+# Docker configuration
