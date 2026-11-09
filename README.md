@@ -50,7 +50,8 @@ Install the following tools before running the project:
 - [Node.js and npm](https://nodejs.org/en/download)
 - [Angular CLI](https://angular.dev/tools/cli)
 - [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download)
-- [Oracle Database Free](https://www.oracle.com/database/free/)
+- [Oracle SQL Developer](https://www.oracle.com/database/sqldeveloper/)
+
 
 [Oracle SQL Developer](https://www.oracle.com/database/sqldeveloper/) can be used to manage the database and execute SQL statements.
 
@@ -75,11 +76,14 @@ ng serve --port 4300
 
 Open [http://localhost:4300](http://localhost:4300) in your browser.
 
+
 ### 3. Configure the Database Connection
 
-Make sure Oracle Database is running and the required database user and tables have been created.
+MyExpenseTracker supports both local Oracle Database and Oracle Autonomous Database (Cloud).
 
-Configure the Oracle connection string in your local backend settings. For example, create `backend/appsettings.Development.json` with your own database credentials:
+#### Option A: Local Oracle Database
+
+For local development, configure the Oracle connection string in your backend settings:
 
 ```json
 {
@@ -89,9 +93,55 @@ Configure the Oracle connection string in your local backend settings. For examp
 }
 ```
 
-Replace the example username and password with your own settings. Update the data source if your Oracle Database uses a different host, port, or service name.
+Replace the example credentials with your own database username and password.
 
-**Security:** Never commit database passwords or other secrets to GitHub.
+#### Option B: Oracle Autonomous Database (Cloud)
+
+To connect to Oracle Autonomous Database:
+
+1. Create an Oracle Autonomous Database instance.
+2. Download and extract the database Wallet.
+3. Place the Wallet files in a local directory, such as:
+
+   `D:\MyExpenseTracker\Wallet_MYEXPENSEDB`
+
+
+4. Update the `sqlnet.ora` file in the Wallet directory:
+
+```text
+WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY="D:\MyExpenseTracker\Wallet_MYEXPENSEDB")))
+SSL_SERVER_DN_MATCH=yes
+```
+
+5. Configure the Oracle connection string using your database credentials and Wallet location.
+
+Example:
+
+```text
+User Id=YOUR_USERNAME;Password=YOUR_PASSWORD;Data Source=myexpensedb_high;TNS_ADMIN=D:\MyExpenseTracker\Wallet_MYEXPENSEDB
+```
+
+Replace the username, password, Wallet directory, and TNS alias with your own values.
+
+**Security:** Never commit database passwords, Wallet files, or other sensitive credentials to GitHub. Use local configuration or .NET User Secrets to store database credentials.
+
+
+#### Using .NET User Secrets
+
+For local development, .NET User Secrets can be used to store database credentials securely.
+
+Run the following commands inside the backend directory:
+
+```bash
+dotnet user-secrets init
+dotnet user-secrets set "ConnectionStrings:OracleDb" "User Id=YOUR_USERNAME;Password=YOUR_PASSWORD;Data Source=myexpensedb_high;TNS_ADMIN=YOUR_WALLET_PATH"
+```
+
+User Secrets are stored outside the project directory and are not committed to Git.
+
+
+
+
 
 ### 4. Run the Backend
 
@@ -100,7 +150,7 @@ Open a separate terminal and run:
 ```bash
 cd backend
 dotnet restore
-dotnet run
+dotnet run --urls http://localhost:5098
 ```
 
 Check the terminal output for the backend URL. Make sure the frontend's API base URL matches the address where the backend is running.
