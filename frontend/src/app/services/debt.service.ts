@@ -37,7 +37,7 @@ export interface CreateDebtRequest {
 // -------------------------------------------------------------------------
 
 export class DebtService {
-  private apiUrl = 'http://localhost:5098/api/debts';
+  private apiUrl = 'https://myexpensetracker-ebmd.onrender.com/api/debts';
 
   constructor(private http: HttpClient) {}
 

@@ -27,7 +27,7 @@ export class BudgetService {
   private http = inject(HttpClient);
 
   // 後端 API 的網址
-  private apiUrl = 'http://localhost:5098/api/budgets';
+  private apiUrl = 'https://myexpensetracker-ebmd.onrender.com/api/budgets';
 
   // GET：取得所有預算
   getBudgets(): Observable<Budget[]> {

@@ -12,7 +12,7 @@ export interface Debtor {
   providedIn: 'root'
 })
 export class DebtorService {
-  private apiUrl = 'http://localhost:5098/api/debtors';
+  private apiUrl = 'https://myexpensetracker-ebmd.onrender.com/api/debtors';
 
   constructor(private http: HttpClient) {}
 

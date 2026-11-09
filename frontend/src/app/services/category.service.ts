@@ -21,7 +21,7 @@ export interface CategoryRequest {
 })
 export class CategoryService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:5098/api/categories';
+  private apiUrl = 'https://myexpensetracker-ebmd.onrender.com/api/categories';
 
   // 取得所有類別
   getCategories(): Observable<Category[]> {
