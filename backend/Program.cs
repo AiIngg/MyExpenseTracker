@@ -1,4 +1,5 @@
 
+// 引入套件
 using System.Data;
 using Oracle.ManagedDataAccess.Client;
 
@@ -13,7 +14,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AngularDev", policy =>
     {
-        policy.WithOrigins("http://localhost:4300")
+        policy.WithOrigins(
+                    "http://localhost:4300",
+                    "https://my-expense-tracker-nine-puce.vercel.app"
+              )
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -21,6 +25,8 @@ builder.Services.AddCors(options =>
 
 
 var app = builder.Build();
+
+
 
 app.UseHttpsRedirection();
 
