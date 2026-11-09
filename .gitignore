@@ -33,4 +33,7 @@ backend/appsettings.Development.json
 Wallet_MYEXPENSEDB/
 Wallet_MYEXPENSEDB.zip
 
-# Docker configuration
+# Oracle Wallet deployment files - keep locally
+cwallet_base64.txt
+ewallet_base64.txt
+sqlnet.render.ora
