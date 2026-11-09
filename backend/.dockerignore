@@ -10,3 +10,5 @@ sqlnet.ora
 tnsnames.ora
 ojdbc.properties
 Wallet_MYEXPENSEDB/
+cwallet_base64.txt
+ewallet_base64.txt
