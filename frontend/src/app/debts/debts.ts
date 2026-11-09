@@ -90,7 +90,7 @@ markDebtSettled(debt: Debt): void {
   get totalDebt(): number {
     return this.debts()
       .filter(debt => debt.debtType === 'I_OWE')
-      .reduce((total, debt) => total + debt.amount, 0);
+      .reduce((total, debt) => total + debt.amount, 0); // 把陣列裡面的多筆資料累加，最後得到一個結果。
   }
 
   
@@ -98,9 +98,9 @@ markDebtSettled(debt: Debt): void {
   get peopleOweMeCount(): number {
     return new Set(
       this.debts()
-        .filter(debt => debt.debtType === 'OWED_TO_ME')
-        .map(debt => debt.debtorId)
-    ).size;
+        .filter(debt => debt.debtType === 'OWED_TO_ME') // 篩選
+        .map(debt => debt.debtorId) // 取得
+    ).size; // 取得元素個數
   }
 
   // People I Owe 統計：計算我欠錢的人數
@@ -131,7 +131,10 @@ markDebtSettled(debt: Debt): void {
       const key = String(debt.debtorId);
 
       if (!groups.has(key)) {
-        groups.set(key, {
+        // Map {Key, Value}
+        groups.set(key, { // ← Key
+
+          // Value 裡面的資料 ↓ ↓ ↓
           key,
           debtorId: debt.debtorId,
           debtorName: debt.debtorName,

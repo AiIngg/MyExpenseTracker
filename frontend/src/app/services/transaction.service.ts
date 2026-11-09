@@ -30,7 +30,7 @@ export interface TransactionRequest {
 
 export class TransactionService {
 
-  private apiUrl = 'http://localhost:5098/api/transactions';
+  private apiUrl = 'https://myexpensetracker-ebmd.onrender.com/api/transactions';
 
   constructor(private http: HttpClient) {}
 
