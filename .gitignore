@@ -33,7 +33,9 @@ backend/appsettings.Development.json
 Wallet_MYEXPENSEDB/
 Wallet_MYEXPENSEDB.zip
 
-# Oracle Wallet deployment files - keep locally
+# Oracle Wallet deployment Base64 files - keep locally
 cwallet_base64.txt
 ewallet_base64.txt
+tnsnames_base64.txt
+sqlnet_base64.txt
 sqlnet.render.ora

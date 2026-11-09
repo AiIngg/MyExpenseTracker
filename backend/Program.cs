@@ -1,9 +1,73 @@
-
 // 引入套件
 using System.Data;
 using Oracle.ManagedDataAccess.Client;
+using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// -------------------------------------------------------------------------
+// Oracle Wallet：Render 部署時還原憑證
+// -------------------------------------------------------------------------
+
+
+if (OperatingSystem.IsLinux())
+{
+    // 1. 建立 Wallet 資料夾
+    var walletPath = "/tmp/oracle-wallet";
+
+    Directory.CreateDirectory(walletPath);
+
+    // 2. 讀取 Render 環境變數
+    var cwalletBase64 =
+        Environment.GetEnvironmentVariable("ORACLE_CWALLET_BASE64");
+
+    var tnsnamesBase64 =
+        Environment.GetEnvironmentVariable("ORACLE_TNSNAMES_BASE64");
+
+    var sqlnetBase64 =
+        Environment.GetEnvironmentVariable("ORACLE_SQLNET_BASE64");
+
+    // 3. 確認環境變數都有設定
+    if (string.IsNullOrWhiteSpace(cwalletBase64) ||
+        string.IsNullOrWhiteSpace(tnsnamesBase64) ||
+        string.IsNullOrWhiteSpace(sqlnetBase64))
+    {
+        throw new InvalidOperationException(
+            "Oracle Wallet environment variables are missing.");
+    }
+
+    // 4. 還原 Wallet 檔案
+    File.WriteAllBytes(
+        Path.Combine(walletPath, "cwallet.sso"),
+        Convert.FromBase64String(cwalletBase64));
+
+    File.WriteAllBytes(
+        Path.Combine(walletPath, "tnsnames.ora"),
+        Convert.FromBase64String(tnsnamesBase64));
+
+    File.WriteAllBytes(
+        Path.Combine(walletPath, "sqlnet.ora"),
+        Convert.FromBase64String(sqlnetBase64));
+
+    // 5. 設定 Oracle Wallet 路徑
+    Environment.SetEnvironmentVariable("TNS_ADMIN", walletPath);
+
+    // 6. 更新資料庫連線字串
+    var connectionString =
+        builder.Configuration.GetConnectionString("OracleDb");
+
+    if (!string.IsNullOrWhiteSpace(connectionString))
+    {
+        var updatedConnectionString =
+            new OracleConnectionStringBuilder(connectionString)
+            {
+                TnsAdmin = walletPath
+            };
+
+        builder.Configuration["ConnectionStrings:OracleDb"] =
+            updatedConnectionString.ConnectionString;
+    }
+}
 
 builder.Services.AddOpenApi();
 builder.Services.AddAuthorization();
