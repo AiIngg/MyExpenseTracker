@@ -10,14 +10,15 @@ import {
   TransactionForm,
   TransactionFormData,
   TransactionType,
+  
 } from '../shared/transaction-form/transaction-form';
 import { TransactionFormService } from '../services/transaction-form.service';
-
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-overview',
   standalone: true,
-  imports: [TransactionForm],
+  imports: [TransactionForm, FormsModule],
   templateUrl: './overview.html',
   styleUrl: './overview.css',
 })
@@ -94,9 +95,12 @@ export class Overview implements OnInit {
       // 只統計當月交易
       const date = new Date(transaction.date);
 
+
+      const [year, month] = this.selectedMonth.split('-').map(Number);
+
       if (
-        date.getFullYear() !== now.getFullYear() ||
-        date.getMonth() !== now.getMonth()
+        date.getFullYear() !== year ||
+        date.getMonth() + 1 !== month
       ) {
         continue;
       }
@@ -139,15 +143,15 @@ export class Overview implements OnInit {
 
   // 計算當月支出
   getMonthlySpending(): number {
-    const now = new Date();
+    const [year, month] = this.selectedMonth.split('-').map(Number);
 
     return this.transactions
       .filter((transaction) => {
         const date = new Date(transaction.date);
 
         return (
-          date.getFullYear() === now.getFullYear() &&
-          date.getMonth() === now.getMonth() &&
+          date.getFullYear() === year  &&
+          date.getMonth() + 1 === month &&
           transaction.categoryId !== null &&
           [3, 4, 5, 6, 7, 21].includes(transaction.categoryId)
         );
@@ -157,15 +161,15 @@ export class Overview implements OnInit {
 
   // 計算當月收入
   getMonthlyIncome(): number {
-    const now = new Date();
+    const [year, month] = this.selectedMonth.split('-').map(Number);
 
     return this.transactions
       .filter((transaction) => {
         const date = new Date(transaction.date);
 
         return (
-          date.getFullYear() === now.getFullYear() &&
-          date.getMonth() === now.getMonth() &&
+          date.getFullYear() === year &&
+          date.getMonth() + 1 === month &&
           transaction.categoryId !== null &&
           [1, 2].includes(transaction.categoryId)
         );
@@ -241,6 +245,19 @@ export class Overview implements OnInit {
     },
   });
 }
+
+
+  // 月份選擇
+  selectedMonth = this.getCurrentMonth();
+
+  getCurrentMonth(): string {
+    const now = new Date();
+
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+
+    return `${year}-${month}`;
+  }
 
 
 

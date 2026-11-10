@@ -234,3 +234,29 @@
     width: 100%;
   }
 }
+
+
+
+
+.month-selector {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.month-selector label {
+  color: #687d70;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.month-selector input {
+  padding: 10px;
+  border: 1px solid #829789;
+  border-radius: 8px;
+  background-color: white;
+  color: #514f4b;
+  font-size: 14px;
+  cursor: pointer;
+}

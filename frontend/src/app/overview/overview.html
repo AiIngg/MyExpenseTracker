@@ -16,13 +16,23 @@
     </app-transaction-form>
   </header>
 
+  <div class="month-selector">
+      <label for="month">Select Month:</label>
+
+      <input
+        id="month"
+        type="month"
+        [(ngModel)]="selectedMonth"
+      />
+  </div>
+
   <!-- 金額摘要卡片 -->
   <section class="summary-cards">
 
     <div class="summary-card">
       <p>Monthly Spending</p>
       <h2>NT$ {{ getMonthlySpending().toLocaleString('en-US') }}</h2>
-      <span>This month</span>
+      <span>{{ selectedMonth }}</span>
     </div>
 
     <div class="summary-card">
@@ -44,6 +54,7 @@
   <!-- 支出分類 -->
   <section class="content-section spending-section">
     <h2>Spending by Category</h2>
+
 
     @if (getSpendingByCategory().length > 0) {
       <div class="spending-layout">
