@@ -63,8 +63,11 @@ export class Overview implements OnInit {
     });
   }
 
-  // 依照支出類別計算金額
+
+  // 依照支出類別計算當月金額
   getSpendingByCategory() {
+    const now = new Date();
+
     const categoryMap: Record<number, string> = {
       3: 'Transportation',
       4: 'Shopping',
@@ -75,12 +78,12 @@ export class Overview implements OnInit {
     };
 
     const colors: Record<number, string> = {
-      3: '#A9BBA5',  // Transportation：淺鼠尾草綠
-      4: '#829A83',  // Shopping：莫蘭迪綠
-      5: '#6F8974',  // Entertainment：深鼠尾草綠
-      6: '#C5D1BD',  // Healthcare：淡灰綠
-      7: '#97AD94',  // Others：柔和綠
-      21: '#526B5C', // Food & Dining：深森林綠
+      3: '#A9BBA5',
+      4: '#829A83',
+      5: '#6F8974',
+      6: '#C5D1BD',
+      7: '#97AD94',
+      21: '#526B5C',
     };
 
     const totals = new Map<number, number>();
@@ -88,6 +91,17 @@ export class Overview implements OnInit {
     for (const transaction of this.transactions) {
       const id = transaction.categoryId;
 
+      // 只統計當月交易
+      const date = new Date(transaction.date);
+
+      if (
+        date.getFullYear() !== now.getFullYear() ||
+        date.getMonth() !== now.getMonth()
+      ) {
+        continue;
+      }
+
+      // 只統計支出類別
       if (id === null || !(id in categoryMap)) {
         continue;
       }
@@ -114,6 +128,8 @@ export class Overview implements OnInit {
       }))
       .sort((a, b) => b.amount - a.amount);
   }
+
+
 
   // 計算總支出
   getTotalSpending(): number {
