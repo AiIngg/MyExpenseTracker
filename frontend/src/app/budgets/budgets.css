@@ -30,34 +30,7 @@
   line-height: 1.6;
 }
 
-/* 月份選擇器 */
-.month-selector {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
 
-.month-selector label {
-  color: #77736d;
-  font-size: 13px;
-}
-
-.month-selector input {
-  min-height: 42px;
-  padding: 9px 12px;
-  border: 1px solid #ddd5ca;
-  border-radius: 8px;
-  background-color: #fcfaf7;
-  color: #514f4b;
-  font: inherit;
-  outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.month-selector input:focus {
-  border-color: #829789;
-  box-shadow: 0 0 0 3px rgba(130, 151, 137, 0.15);
-}
 
 /* 三張摘要卡片 */
 .summary-grid {
@@ -258,13 +231,6 @@
     flex-direction: column;
   }
 
-  .month-selector {
-    width: 100%;
-  }
-
-  .month-selector input {
-    width: 100%;
-  }
 
   .summary-grid {
     grid-template-columns: 1fr;

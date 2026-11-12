@@ -7,6 +7,7 @@ import {
   TransactionService,
   Transaction,
 } from '../services/transaction.service';
+import { MonthSelector } from '../shared/month-selector/month-selector';
 
 // Budget 頁面使用的資料格式
 interface Budget {
@@ -20,7 +21,7 @@ interface Budget {
 @Component({
   selector: 'app-budgets',
   standalone: true,
-  imports: [DecimalPipe, FormsModule],
+  imports: [DecimalPipe, FormsModule, MonthSelector],
   templateUrl: './budgets.html',
   styleUrl: './budgets.css',
 })
@@ -55,7 +56,8 @@ export class Budgets implements OnInit {
   }
 
   // 切換月份時，重新載入預算資料
-  onMonthChange(): void {
+  onMonthChange(month: string): void {
+    this.selectedMonth = month;
     this.loadBudgets();
   }
 

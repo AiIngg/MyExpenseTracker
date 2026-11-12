@@ -1,0 +1,10 @@
+<div class="month-selector">
+  <label for="month-selector-input">Month</label>
+
+  <input
+    id="month-selector-input"
+    type="month"
+    [value]="month"
+    (change)="onMonthChange($any($event.target).value)"
+  />
+</div>

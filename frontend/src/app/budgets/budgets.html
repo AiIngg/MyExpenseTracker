@@ -5,16 +5,11 @@
       <h1>Budget</h1>
       <p>Manage your monthly spending limits.</p>
     </div>
-
-    <div class="month-selector">
-      <label for="budget-month">Month</label>
-      <input
-        id="budget-month"
-        type="month"
-        [(ngModel)]="selectedMonth"
-        (ngModelChange)="onMonthChange()"
-      />
-    </div>
+    
+    <app-month-selector
+      [month]="selectedMonth"
+      (monthChange)="onMonthChange($event)"
+    ></app-month-selector>
   </header>
 
   <!-- Summary cards -->

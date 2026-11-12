@@ -14,11 +14,13 @@ import {
 } from '../shared/transaction-form/transaction-form';
 import { TransactionFormService } from '../services/transaction-form.service';
 import { FormsModule } from '@angular/forms';
+import { MonthSelector } from '../shared/month-selector/month-selector';
+
 
 @Component({
   selector: 'app-overview',
   standalone: true,
-  imports: [TransactionForm, FormsModule],
+  imports: [TransactionForm, FormsModule, MonthSelector],
   templateUrl: './overview.html',
   styleUrl: './overview.css',
 })

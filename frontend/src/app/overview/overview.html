@@ -16,15 +16,9 @@
     </app-transaction-form>
   </header>
 
-  <div class="month-selector">
-      <label for="month">Select Month:</label>
-
-      <input
-        id="month"
-        type="month"
-        [(ngModel)]="selectedMonth"
-      />
-  </div>
+  <app-month-selector
+    [(month)]="selectedMonth"
+  ></app-month-selector>
 
   <!-- 金額摘要卡片 -->
   <section class="summary-cards">

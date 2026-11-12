@@ -1,0 +1,38 @@
+.month-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  width: 180px;
+  flex-shrink: 0;
+}
+
+.month-selector label {
+  color: #899787;
+  font-size: 13px;
+}
+
+.month-selector input {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 42px;
+  padding: 9px 12px;
+  border: 1px solid #ddd5ca;
+  border-radius: 8px;
+  background-color: #fcfaf7;
+  color: #878174;
+  font: inherit;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.month-selector input:focus {
+  border-color: #829789;
+  box-shadow: 0 0 0 3px rgba(130, 151, 137, 0.15);
+}
+
+/* 手機版 */
+@media (max-width: 600px) {
+  .month-selector {
+    width: 180px;
+  }
+}
